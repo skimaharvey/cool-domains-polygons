@@ -5,14 +5,13 @@ pragma solidity ^0.8.10;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
+//string library (converts to bytes for gas saving reasons)
 import {StringUtils} from "./libraries/StringUtils.sol";
-// We import another help function
+
 import {Base64} from "./libraries/Base64.sol";
 
 import "hardhat/console.sol";
 
-// We inherit the contract we imported. This means we'll have access
-// to the inherited contract's methods.
 contract Domains is ERC721URIStorage {
     // Magic given to us by OpenZeppelin to help us keep track of tokenIds.
     using Counters for Counters.Counter;
@@ -30,7 +29,7 @@ contract Domains is ERC721URIStorage {
 
     constructor(string memory _tld)
         payable
-        ERC721("Ninja Name Service", "NNS")
+        ERC721("French Name Service", "NNS")
     {
         tld = _tld;
         console.log("%s name service deployed", _tld);
@@ -95,12 +94,12 @@ contract Domains is ERC721URIStorage {
         _tokenIds.increment();
     }
 
-    // This function will give us the price of a domain based on length
+    // This function will give us the price of a domain based on length. The shorter the name the higher the price
     function price(string calldata name) public pure returns (uint256) {
         uint256 len = StringUtils.strlen(name);
         require(len > 0);
         if (len == 3) {
-            return 5 * 10**17; // 5 MATIC = 5 000 000 000 000 000 000 (18 decimals). We're going with 0.5 Matic cause the faucets don't give a lot
+            return 5 * 10**17; // 5 MATIC = 5 000 000 000 000 000 000 (18 decimals). We're going with 0.5 Matic
         } else if (len == 4) {
             return 3 * 10**17; // To charge smaller amounts, reduce the decimals. This is 0.3
         } else {
@@ -109,7 +108,6 @@ contract Domains is ERC721URIStorage {
     }
 
     function getAddress(string calldata name) public view returns (address) {
-        // Check that the owner is the transaction sender
         return domains[name];
     }
 
