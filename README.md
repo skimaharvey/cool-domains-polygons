@@ -1,15 +1,5 @@
-# Basic Sample Hardhat Project
+# French Domain Creator on Mumbai testnest
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+Create your .french domain on: https://vibrant-bhaskara-087ace.netlify.app/
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+and checkout the collection https://testnets.opensea.io/collection/french-name-service
